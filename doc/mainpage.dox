@@ -1,0 +1,27 @@
+/*! \mainpage Geometry Template Library
+ * \image html logo.jpg
+ * \section intro_sec Introduction
+ * The goal of gtl is to provide a common interface for general geometry needs. 
+ * Benefits are:
+ * - re-use the documentation
+ * - re-use unit tests
+ * - compare differents implementations
+ * - simplify algorithm exchanges
+ *
+ * The reference implementation is based on c++ templates.
+ * 
+ * \section help_sec HELP HELP WANTED 
+ *  Please contact me at: morganleborgne at gmail.com
+ *
+ * \section feature_sec Features
+ * - 2D, 3D, 4D vectors
+ * - 2D, 3D boxes
+ * - 3x3, 4x4 matrices 
+ * - quaternion
+ * - complex
+ * - Ray, plane, spheres.
+ * - Intersection functions for all the geometry classes 
+ * 
+ *
+ */
+

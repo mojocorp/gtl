@@ -1,0 +1,19 @@
+language: cpp
+branches:
+  only:
+    - master
+matrix:
+  include:
+  - compiler: clang
+    os: linux
+    env: QMAKESPEC=unsupported/linux-clang
+  - compiler: gcc
+    os: linux
+    env: QMAKESPEC=linux-g++
+#  - compiler: clang
+#    os: osx
+#    env: QMAKESPEC=unsupported/macx-clang
+#  - compiler: gcc
+#    os: osx
+#    env: QMAKESPEC=macx-g++
+script: cd tests && qmake -r && make -j4 && ./tests 
