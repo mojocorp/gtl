@@ -108,6 +108,15 @@ namespace gtl {
             return magnitude;
         }
 
+        //! Returns the normalized unit vector form of this vector.
+        vec3<Type> normalized() const
+        {
+            vec3<Type> v(*this);
+            v.normalize();
+
+            return v;
+        }
+
         //! Returns the cross product of this vector with \a a_vec.
         vec3<Type> cross(const vec3<Type>& a_vec) const
         {

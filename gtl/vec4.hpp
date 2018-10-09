@@ -115,6 +115,15 @@ public:
         return magnitude;
     }
 
+    //! Returns the normalized unit vector form of this vector.
+    vec4<Type> normalized() const
+    {
+        vec4<Type> v(*this);
+        v.normalize();
+
+        return v;
+    }
+
     //! Negate the vector (i.e. point it in the opposite direction).
     void negate()
     {
