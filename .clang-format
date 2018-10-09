@@ -1,0 +1,11 @@
+﻿---
+BasedOnStyle: WebKit
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: 'false'
+AlignConsecutiveDeclarations: 'false'
+AlignEscapedNewlinesLeft: 'false'
+AlignOperands: 'false'
+AlignTrailingComments: 'false'
+NamespaceIndentation: All
+
+...

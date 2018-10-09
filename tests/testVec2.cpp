@@ -5,9 +5,9 @@ using namespace gtl;
 
 TEST(Vec2Test, sanity)
 {
-    EXPECT_EQ(2*sizeof(int),    sizeof(vec2i));
-    EXPECT_EQ(2*sizeof(float),  sizeof(vec2f));
-    EXPECT_EQ(2*sizeof(double), sizeof(vec2d));
+    EXPECT_EQ(2 * sizeof(int), sizeof(vec2i));
+    EXPECT_EQ(2 * sizeof(float), sizeof(vec2f));
+    EXPECT_EQ(2 * sizeof(double), sizeof(vec2d));
 }
 
 TEST(Vec2Test, contructors)
@@ -17,11 +17,11 @@ TEST(Vec2Test, contructors)
 
     EXPECT_TRUE(v2f1 == v2f2);
 
-    EXPECT_TRUE(v2f1 + v2f2 == 2.0f*v2f1);
+    EXPECT_TRUE(v2f1 + v2f2 == 2.0f * v2f1);
 
-    EXPECT_TRUE(v2f1 - v2f2 == vec2f(0.0f,0.0f));
+    EXPECT_TRUE(v2f1 - v2f2 == vec2f(0.0f, 0.0f));
 
-    v2f1.setValue(1.0f,0.0f);
+    v2f1.setValue(1.0f, 0.0f);
 
     EXPECT_FLOAT_EQ(1.0f, v2f1.length());
 
@@ -35,4 +35,3 @@ TEST(Vec2Test, contructors)
     EXPECT_EQ(v2f1.x, v2f1[0]);
     EXPECT_EQ(v2f1.y, v2f1[1]);
 }
-

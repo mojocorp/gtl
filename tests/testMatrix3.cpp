@@ -21,5 +21,5 @@ TEST(Matrix3Test, contructors)
     mat3f1.inverse();
 
     quaternionf rot;
-	mat3f1.setRotate(rot);
+    mat3f1.setRotate(rot);
 }

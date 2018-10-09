@@ -1,12 +1,11 @@
 #pragma once
 
-#include <gtl/gtl.hpp>
-#include <gtl/vec3.hpp>
-#include <gtl/plane.hpp>
 #include <gtl/box3.hpp>
+#include <gtl/gtl.hpp>
+#include <gtl/plane.hpp>
+#include <gtl/vec3.hpp>
 
-namespace gtl
-{
+namespace gtl {
     /*!
     \class ray ray.hpp geometry/ray.hpp
     \brief Represents a directed ray in 3D.
@@ -16,25 +15,24 @@ namespace gtl
 
     \sa vec3
     */
-    template<typename Type>
-    class ray
-    {
+    template <typename Type>
+    class ray {
     public:
         //! Constructs an instance with initial values from \a a_ray.
-        ray(const ray<Type> & a_ray)
+        ray(const ray<Type>& a_ray)
         {
             m_origin = a_ray.m_origin;
             m_direction = a_ray.m_direction;
         }
 
         //! Create a ray from a_origin with the direction a_direction. If \a normalize is true, \a a_direction will be normalized.
-        ray(const vec3<Type> & a_origin, const vec3<Type> & a_direction, bool normalize = true)
+        ray(const vec3<Type>& a_origin, const vec3<Type>& a_direction, bool normalize = true)
         {
             setValue(a_origin, a_direction, normalize);
         }
 
         //! Set position and direction of the ray. If \a normalize is true, \a a_direction will be normalized.
-        void setValue(const vec3<Type> & a_origin, const vec3<Type> & a_direction, bool normalize = true)
+        void setValue(const vec3<Type>& a_origin, const vec3<Type>& a_direction, bool normalize = true)
         {
             m_origin = a_origin;
             m_direction = a_direction;
@@ -43,13 +41,13 @@ namespace gtl
         }
 
         //! Return the ray origin.
-        const vec3<Type> & getOrigin() const
+        const vec3<Type>& getOrigin() const
         {
             return m_origin;
         }
 
         //! Return the ray normalized direction.
-        const vec3<Type> & getDirection() const
+        const vec3<Type>& getDirection() const
         {
             return m_direction;
         }
@@ -57,17 +55,17 @@ namespace gtl
         //! Get point on ray at t
         vec3<Type> getValue(Type t) const
         {
-            return vec3<Type>(m_origin + t*m_direction);
+            return vec3<Type>(m_origin + t * m_direction);
         }
 
         //! Distance point line
-        Type getDistance(const vec3<Type> & pt) const
+        Type getDistance(const vec3<Type>& pt) const
         {
             return std::sqrt(getSqrDistance(pt));
         }
 
         //! Squared distance point line
-        Type getSqrDistance(const vec3<Type> & pt) const
+        Type getSqrDistance(const vec3<Type>& pt) const
         {
             const Type t = (pt - m_origin).dot(m_direction);
 
@@ -81,7 +79,7 @@ namespace gtl
         }
 
         //! Project the given point on the ray.
-        vec3<Type> project(const vec3<Type> & pt) const
+        vec3<Type> project(const vec3<Type>& pt) const
         {
             const Type numerator = (pt - m_origin).dot(m_direction);
             const Type denumerator = m_direction.length();
@@ -95,7 +93,7 @@ namespace gtl
         distance to the plane in which the triangle lies and (u,v) represents the
         coordinates inside the triangle.
         */
-        bool intersect(const vec3<Type> & vert0, const vec3<Type> & vert1, const vec3<Type> & vert2, vec3<Type> & a_tuv) const
+        bool intersect(const vec3<Type>& vert0, const vec3<Type>& vert1, const vec3<Type>& vert2, vec3<Type>& a_tuv) const
         {
             // Tomas Moller and Ben Trumbore.
             // Fast, minimum storage ray-triangle intersection.
@@ -156,7 +154,7 @@ namespace gtl
           When they don't exactly intersect at a point they can be connected by a line segment,
           the shortest line segment is unique and is often considered to be their intersection in 3D.
           */
-        bool intersect(const ray<Type> & a_ray, Type & mua, Type & mub) const
+        bool intersect(const ray<Type>& a_ray, Type& mua, Type& mub) const
         {
             // Based on code from Paul Bourke
             // http://astronomy.swin.edu.au/~pbourke
@@ -196,24 +194,23 @@ namespace gtl
         }
 
         //! Check the two given ray for equality.
-        friend bool operator ==(const ray<Type> & r1, const ray<Type> & r2)
+        friend bool operator==(const ray<Type>& r1, const ray<Type>& r2)
         {
-            return(r1.m_origin == r2.m_origin && r1.m_direction == r2.m_direction);
+            return (r1.m_origin == r2.m_origin && r1.m_direction == r2.m_direction);
         }
 
         //! Check the two given ray for inequality.
-        friend bool operator !=(const ray<Type> & r1, const ray<Type> & r2)
+        friend bool operator!=(const ray<Type>& r1, const ray<Type>& r2)
         {
             return !(r1 == r2);
         }
 
     private:
-        vec3<Type> m_origin;	//!< ray origin
+        vec3<Type> m_origin; //!< ray origin
         vec3<Type> m_direction; //!< Normalized direction
     };
 
-
-    typedef ray<int>    rayi;
-    typedef ray<float>  rayf;
+    typedef ray<int> rayi;
+    typedef ray<float> rayf;
     typedef ray<double> rayd;
 } // namespace gtl

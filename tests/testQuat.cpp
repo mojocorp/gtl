@@ -6,5 +6,4 @@ using namespace gtl;
 TEST(QuatTest, contructors)
 {
     quaternionf quatf;
- 
 }

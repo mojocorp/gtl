@@ -1,12 +1,11 @@
 #pragma once
 
-#include <gtl/gtl.hpp>
-#include <gtl/vec3.hpp>
 #include <gtl/box3.hpp>
+#include <gtl/gtl.hpp>
 #include <gtl/matrix4.hpp>
+#include <gtl/vec3.hpp>
 
-namespace gtl
-{
+namespace gtl {
     /*!
     \class xfbox3 xfbox3.hpp geometry/xfbox3.hpp
     \brief The xfbox3 class is an object oriented box.
@@ -16,47 +15,49 @@ namespace gtl
 
     \sa box3
     */
-    template<typename Type>
-    class xfbox3 : public box3<Type>
-    {
+    template <typename Type>
+    class xfbox3 : public box3<Type> {
     public:
         //! The default constructor makes an empty box.
-        xfbox3() : box3<Type>()
+        xfbox3()
+            : box3<Type>()
         {
             m_matrix.makeIdentity();
             m_invertedMatrix.makeIdentity();
         }
 
         //!	Constructs a box with the given corners.
-        xfbox3(const vec3<Type> & a_min, const vec3<Type> & a_max) : box3<Type>(a_min, a_max)
+        xfbox3(const vec3<Type>& a_min, const vec3<Type>& a_max)
+            : box3<Type>(a_min, a_max)
         {
             m_matrix.makeIdentity();
             m_invertedMatrix.makeIdentity();
         }
 
-        xfbox3(const box3<Type> & a_box) : box3<Type>(a_box.m_min, a_box.m_max)
+        xfbox3(const box3<Type>& a_box)
+            : box3<Type>(a_box.m_min, a_box.m_max)
         {
             m_matrix.makeIdentity();
             m_invertedMatrix.makeIdentity();
         }
 
-        void transform(const matrix4<Type> & m)
+        void transform(const matrix4<Type>& m)
         {
             setTransform(m_matrix * m);
         }
 
-        void setTransform(const matrix4<Type> & m)
+        void setTransform(const matrix4<Type>& m)
         {
             m_matrix = m;
             m_invertedMatrix = m.inverse();
         }
 
-        const matrix4<Type> & getTransform() const
+        const matrix4<Type>& getTransform() const
         {
             return m_matrix;
         }
 
-        const matrix4<Type> & getInverse() const
+        const matrix4<Type>& getInverse() const
         {
             return m_invertedMatrix;
         }
@@ -68,14 +69,14 @@ namespace gtl
             return transcenter;
         }
 
-        void extendBy(const vec3<Type> &pt)
+        void extendBy(const vec3<Type>& pt)
         {
             vec3<Type> trans;
             m_invertedMatrix.multVecMatrix(pt, trans);
             box3<Type>::extendBy(trans);
         }
 
-        void extendBy(const box3<Type> &bb)
+        void extendBy(const box3<Type>& bb)
         {
             if (bb.isEmpty())
                 return;
@@ -86,7 +87,6 @@ namespace gtl
                 m_invertedMatrix.makeIdentity();
                 return;
             }
-
         }
         /*
         void extendBy(const xfbox3<Type> &bb)
@@ -121,7 +121,7 @@ namespace gtl
             return box;
         }
 
-        Type getVolume () const
+        Type getVolume() const
         {
             if (box3<Type>::isEmpty())
                 return 0.0;
@@ -130,24 +130,23 @@ namespace gtl
         }
 
         //! Check \a b1 and \a b2 for equality.
-        friend bool operator ==(const xfbox3<Type> & b1, const xfbox3<Type> & b2)
-        { 
-            return  (b1.getMin() == b2.getMin() && 
-                     b1.getMax() == b2.getMax() &&
-                     b1.m_matrix == b2.m_matrix); 
+        friend bool operator==(const xfbox3<Type>& b1, const xfbox3<Type>& b2)
+        {
+            return (b1.getMin() == b2.getMin() && b1.getMax() == b2.getMax() && b1.m_matrix == b2.m_matrix);
         }
 
         //! Check \a b1 and \a b2 for inequality.
-        friend bool operator !=(const xfbox3<Type> & b1, const xfbox3<Type> & b2)
-        { 
-            return !(b1 == b2); 
+        friend bool operator!=(const xfbox3<Type>& b1, const xfbox3<Type>& b2)
+        {
+            return !(b1 == b2);
         }
+
     private:
         matrix4<Type> m_matrix;
         matrix4<Type> m_invertedMatrix;
     };
 
-    typedef xfbox3<int>    xfbox3i;
-    typedef xfbox3<float>  xfbox3f;
+    typedef xfbox3<int> xfbox3i;
+    typedef xfbox3<float> xfbox3f;
     typedef xfbox3<double> xfbox3d;
 } // namespace gtl

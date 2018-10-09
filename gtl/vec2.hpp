@@ -2,8 +2,7 @@
 
 #include <gtl/gtl.hpp>
 
-namespace gtl
-{
+namespace gtl {
     /*!
     \class vec2 vec2.hpp geometry/vec2.hpp
     \brief 2 dimensional vector.
@@ -13,9 +12,8 @@ namespace gtl
 
     \sa vec3
     */
-    template<typename Type>
-    class vec2
-    {
+    template <typename Type>
+    class vec2 {
     public:
         Type x;
         Type y;
@@ -42,14 +40,14 @@ namespace gtl
         }
 
         //! Constructs an instance with initial values from \a a_vec.
-        vec2(const vec2<Type> & a_vec)
+        vec2(const vec2<Type>& a_vec)
         {
             x = a_vec.x;
             y = a_vec.y;
         }
 
         //! Set new x and y coordinates for the vector. Returns reference to self.
-        vec2<Type> & setValue(const Type v[2])
+        vec2<Type>& setValue(const Type v[2])
         {
             x = v[0];
             y = v[1];
@@ -58,7 +56,7 @@ namespace gtl
         }
 
         //! Set new x and y coordinates for the vector. Returns reference to self.
-        vec2<Type> & setValue(Type a_x, Type a_y)
+        vec2<Type>& setValue(Type a_x, Type a_y)
         {
             x = a_x;
             y = a_y;
@@ -67,27 +65,27 @@ namespace gtl
         }
 
         //! Returns a pointer to an array containing the coordinates of the vector.
-        const Type * getValue() const
+        const Type* getValue() const
         {
             return &x;
         }
 
         //! Calculates and returns the dot product of this vector with \a a_vec.
-        Type dot(const vec2<Type> & a_vec) const
+        Type dot(const vec2<Type>& a_vec) const
         {
-            return (x*a_vec.x + y*a_vec.y);
+            return (x * a_vec.x + y * a_vec.y);
         }
 
         //! Return length of vector.
         Type length() const
         {
-            return (Type)std::sqrt(x*x + y*y);
+            return (Type)std::sqrt(x * x + y * y);
         }
 
         //! Return squared length of vector.
         Type sqrLength() const
         {
-            return (x*x + y*y);
+            return (x * x + y * y);
         }
 
         //! Normalize the vector to unit length. Return value is the original length of the vector before normalization.
@@ -97,13 +95,14 @@ namespace gtl
 
             if (magnitude != 0.0)
                 (*this) *= (Type)(1.0 / magnitude);
-            else setValue(0.0, 0.0);
+            else
+                setValue(0.0, 0.0);
 
             return magnitude;
         }
 
         //! Returns the cross product of this vector with \a a_vec.
-        Type cross(const vec2<Type> & a_vec)
+        Type cross(const vec2<Type>& a_vec)
         {
             return (x * a_vec.y - y * a_vec.x);
         }
@@ -116,19 +115,19 @@ namespace gtl
         }
 
         //! Index operator. Returns modifiable x or y value.
-        Type &  operator[](int i)
-        { 
+        Type& operator[](int i)
+        {
             return (&x)[i];
         }
 
         //! Index operator. Returns x or y value.
-        const Type & operator[](int i) const
-        { 
+        const Type& operator[](int i) const
+        {
             return (&x)[i];
         }
 
         //! Multiply components of vector with value \a d. Returns reference to self.
-        vec2<Type> & operator *=(const Type d)
+        vec2<Type>& operator*=(const Type d)
         {
             x *= d;
             y *= d;
@@ -137,9 +136,9 @@ namespace gtl
         }
 
         //! Divides components of vector with value \a d. Returns reference to self.
-        vec2<Type> & operator /=(const Type d)
+        vec2<Type>& operator/=(const Type d)
         {
-            const Type inv = 1.0f/d;
+            const Type inv = 1.0f / d;
 
             x *= inv;
             y *= inv;
@@ -148,7 +147,7 @@ namespace gtl
         }
 
         //! Multiply components of vector with value \a a_vec.
-        vec2<Type> & operator *=(const vec2<Type> & a_vec)
+        vec2<Type>& operator*=(const vec2<Type>& a_vec)
         {
             x *= a_vec.x;
             y *= a_vec.y;
@@ -157,7 +156,7 @@ namespace gtl
         }
 
         //! Adds this vector and vector \a a_vec. Returns reference to self.
-        vec2<Type> & operator +=(const vec2<Type> & a_vec)
+        vec2<Type>& operator+=(const vec2<Type>& a_vec)
         {
             x += a_vec.x;
             y += a_vec.y;
@@ -166,7 +165,7 @@ namespace gtl
         }
 
         //! Subtracts vector \a a_vec from this vector. Returns reference to self.
-        vec2<Type> & operator -=(const vec2<Type> & a_vec)
+        vec2<Type>& operator-=(const vec2<Type>& a_vec)
         {
             x -= a_vec.x;
             y -= a_vec.y;
@@ -180,56 +179,56 @@ namespace gtl
             return vec2<Type>(-x, -y);
         }
 
-        friend vec2<Type> operator *(const vec2<Type> & a_vec, const Type d)
-        { 
+        friend vec2<Type> operator*(const vec2<Type>& a_vec, const Type d)
+        {
             return vec2<Type>(a_vec.x * d, a_vec.y * d);
         }
 
-        friend vec2<Type> operator *(const Type d, const vec2<Type> & a_vec)
-        { 
-            return a_vec * d; 
+        friend vec2<Type> operator*(const Type d, const vec2<Type>& a_vec)
+        {
+            return a_vec * d;
         }
 
-        friend vec2<Type> operator /(const vec2<Type> & a_vec, const Type d)
-        { 
+        friend vec2<Type> operator/(const vec2<Type>& a_vec, const Type d)
+        {
             return vec2<Type>(a_vec.x / d, a_vec.y / d);
         }
 
-        friend vec2<Type> operator *(const vec2<Type> & v1, const vec2<Type> & v2)
-        {	
+        friend vec2<Type> operator*(const vec2<Type>& v1, const vec2<Type>& v2)
+        {
             return vec2<Type>(v1.x * v2.x, v1.y * v2.y);
         }
 
-        friend vec2<Type> operator +(const vec2<Type> & v1, const vec2<Type> & v2)
-        {	
+        friend vec2<Type> operator+(const vec2<Type>& v1, const vec2<Type>& v2)
+        {
             return vec2<Type>(v1.x + v2.x, v1.y + v2.y);
         }
 
-        friend vec2<Type> operator -(const vec2<Type> & v1, const vec2<Type> & v2)
-        {	
+        friend vec2<Type> operator-(const vec2<Type>& v1, const vec2<Type>& v2)
+        {
             return vec2<Type>(v1.x - v2.x, v1.y - v2.y);
         }
 
-        //! Check the two given vector for equality. 
-        friend bool operator ==(const vec2<Type> & v1, const vec2<Type> & v2)
-        { 
-            return v1.x==v2.x && v1.y==v2.y;
+        //! Check the two given vector for equality.
+        friend bool operator==(const vec2<Type>& v1, const vec2<Type>& v2)
+        {
+            return v1.x == v2.x && v1.y == v2.y;
         }
 
-        //! Check the two given vector for inequality. 
-        friend bool operator !=(const vec2<Type> & v1, const vec2<Type> & v2)
-        { 
-            return !(v1 == v2); 
+        //! Check the two given vector for inequality.
+        friend bool operator!=(const vec2<Type>& v1, const vec2<Type>& v2)
+        {
+            return !(v1 == v2);
         }
 
         //! Check for equality with given tolerance.
-        bool equals(const vec2<Type> & a_vec, const Type a_tolerance=1E-2) const
+        bool equals(const vec2<Type>& a_vec, const Type a_tolerance = 1E-2) const
         {
-            return ( (*this - a_vec).sqrLength() <= a_tolerance*a_tolerance );
+            return ((*this - a_vec).sqrLength() <= a_tolerance * a_tolerance);
         }
 
-        friend std::ostream & operator<<(std::ostream & os, const vec2<Type> & vect)
-        { 
+        friend std::ostream& operator<<(std::ostream& os, const vec2<Type>& vect)
+        {
             return os << vect.x << " " << vect.y;
         }
 
@@ -240,7 +239,7 @@ namespace gtl
         }
     };
 
-    typedef vec2<int>    vec2i;
-    typedef vec2<float>  vec2f;
+    typedef vec2<int> vec2i;
+    typedef vec2<float> vec2f;
     typedef vec2<double> vec2d;
 } // namespace gtl

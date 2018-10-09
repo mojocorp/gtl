@@ -5,8 +5,8 @@ using namespace gtl;
 
 TEST(ComplexTest, contructors)
 {
-    complexf c1(1,1);
-    complexf c2(1,1);
+    complexf c1(1, 1);
+    complexf c2(1, 1);
 
     EXPECT_TRUE(c1 == c2);
 
@@ -14,12 +14,12 @@ TEST(ComplexTest, contructors)
     EXPECT_FLOAT_EQ(1.0f, c1.getImaginary());
 
     c1.normalize();
-    
+
     EXPECT_FLOAT_EQ(1.0f, c1.modulus());
 
     c2 = c1;
     c1.negate();
-    
+
     EXPECT_TRUE(c1.equals(-c2));
 
     c1 = c1 + c2;
@@ -30,7 +30,7 @@ TEST(ComplexTest, contructors)
     c1 /= c2;
     c1 = c1 * c2;
     c1 *= c2;
-    
+
     c2 = c1;
     c1 /= c1;
     c2 = c2 / c2;
