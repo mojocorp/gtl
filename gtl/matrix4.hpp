@@ -464,6 +464,140 @@ public:
                              0, 0, 0, 1);
     }
 
+    static void ortho(Type left, Type right, Type bottom, Type top, Type nearPlane, Type farPlane)
+    {
+        const Type width = right - left;
+        const Type invheight = top - bottom;
+        const Type clip = farPlane - nearPlane;
+        matrix4<Type> m;
+        m.m_data[0][0] = Type(2.0) / width;
+        m.m_data[1][0] = 0;
+        m.m_data[2][0] = 0;
+        m.m_data[3][0] = -(left + right) / width;
+        m.m_data[0][1] = 0;
+        m.m_data[1][1] = Type(2.0) / invheight;
+        m.m_data[2][1] = 0;
+        m.m_data[3][1] = -(top + bottom) / invheight;
+        m.m_data[0][2] = 0;
+        m.m_data[1][2] = 0;
+        m.m_data[2][2] = Type(-2.0) / clip;
+        m.m_data[3][2] = -(nearPlane + farPlane) / clip;
+        m.m_data[0][3] = 0;
+        m.m_data[1][3] = 0;
+        m.m_data[2][3] = 0;
+        m.m_data[3][3] = 1;
+
+        return m;
+    }
+
+    static void frustum(Type left, Type right, Type bottom, Type top, Type nearPlane, Type farPlane)
+    {
+        const Type width = right - left;
+        const Type invheight = top - bottom;
+        const Type clip = farPlane - nearPlane;
+        matrix4<Type> m;
+        m.m_data[0][0] = Type(2.0) * nearPlane / width;
+        m.m_data[1][0] = 0;
+        m.m_data[2][0] = (left + right) / width;
+        m.m_data[3][0] = 0;
+        m.m_data[0][1] = 0;
+        m.m_data[1][1] = Type(2.0) * nearPlane / invheight;
+        m.m_data[2][1] = (top + bottom) / invheight;
+        m.m_data[3][1] = 0;
+        m.m_data[0][2] = 0;
+        m.m_data[1][2] = 0;
+        m.m_data[2][2] = -(nearPlane + farPlane) / clip;
+        m.m_data[3][2] = Type(-2.0) * nearPlane * farPlane / clip;
+        m.m_data[0][3] = 0;
+        m.m_data[1][3] = 0;
+        m.m_data[2][3] = -1;
+        m.m_data[3][3] = 0;
+
+        return m;
+    }
+
+    static void perspective(Type verticalAngle, Type aspectRatio, Type nearPlane, Type farPlane)
+    {
+        const Type radians = DegToRad(verticalAngle / 2.0f);
+        const Type sine = std::sin(radians);
+        if (sine == 0)
+            return;
+        const Type cotan = std::cos(radians) / sine;
+        const Type clip = farPlane - nearPlane;
+        matrix4<Type> m;
+        m.m_data[0][0] = cotan / aspectRatio;
+        m.m_data[1][0] = 0;
+        m.m_data[2][0] = 0;
+        m.m_data[3][0] = 0;
+        m.m_data[0][1] = 0;
+        m.m_data[1][1] = cotan;
+        m.m_data[2][1] = 0;
+        m.m_data[3][1] = 0;
+        m.m_data[0][2] = 0;
+        m.m_data[1][2] = 0;
+        m.m_data[2][2] = -(nearPlane + farPlane) / clip;
+        m.m_data[3][2] = -(Type(2.0) * nearPlane * farPlane) / clip;
+        m.m_data[0][3] = 0;
+        m.m_data[1][3] = 0;
+        m.m_data[2][3] = -1;
+        m.m_data[3][3] = 0;
+
+        return m;
+    }
+
+    static void lookAt(const vec3<Type>& eye, const vec3<Type>& center, const vec3<Type>& up)
+    {
+        const vec3<Type> forward = (center - eye).normalized();
+        const vec3<Type> side = forward.cross(up).normalized();
+        const vec3<Type> upVector = side.cross(forward);
+
+        matrix4<Type> m;
+        m.m_data[0][0] = side.x();
+        m.m_data[1][0] = side.y();
+        m.m_data[2][0] = side.z();
+        m.m_data[3][0] = -side.dot(eye);
+        m.m_data[0][1] = upVector.x();
+        m.m_data[1][1] = upVector.y();
+        m.m_data[2][1] = upVector.z();
+        m.m_data[3][1] = -upVector.dot(eye);
+        m.m_data[0][2] = -forward.x();
+        m.m_data[1][2] = -forward.y();
+        m.m_data[2][2] = -forward.z();
+        m.m_data[3][2] = -forward.dot(eye);
+        m.m_data[0][3] = 0;
+        m.m_data[1][3] = 0;
+        m.m_data[2][3] = 0;
+        m.m_data[3][3] = 1;
+
+        return m;
+    }
+
+    static void viewport(Type left, Type bottom, Type width, Type height, Type nearPlane, Type farPlane)
+    {
+        const Type w2 = width / Type(2.0);
+        const Type h2 = height / Type(2.0);
+
+        matrix4<Type> m;
+        m.m_data[0][0] = w2;
+        m.m_data[1][0] = 0;
+        m.m_data[2][0] = 0;
+        m.m_data[3][0] = left + w2;
+        m.m_data[0][1] = 0;
+        m.m_data[1][1] = h2;
+        m.m_data[2][1] = 0;
+        m.m_data[3][1] = bottom + h2;
+        m.m_data[0][2] = 0;
+        m.m_data[1][2] = 0;
+        m.m_data[2][2] = (farPlane - nearPlane) / 2.0f;
+        m.m_data[3][2] = (nearPlane + farPlane) / 2.0f;
+        m.m_data[0][3] = 0;
+        m.m_data[1][3] = 0;
+        m.m_data[2][3] = 0;
+        m.m_data[3][3] = 1;
+
+        return m;
+    }
+
 private:
     Type m_data[4][4];
 };
