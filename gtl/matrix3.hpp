@@ -267,9 +267,9 @@ public:
     //! Multiplies matrix by given column vector, giving vector result.
     void multMatrixVec(const vec3<Type>& src, vec3<Type>& dst) const
     {
-        Type x = m_data[0][0] * src[0] + m_data[0][1] * src[1] + m_data[0][2] * src[2];
-        Type y = m_data[1][0] * src[0] + m_data[1][1] * src[1] + m_data[1][2] * src[2];
-        Type z = m_data[2][0] * src[0] + m_data[2][1] * src[1] + m_data[2][2] * src[2];
+        const Type x = m_data[0][0] * src[0] + m_data[0][1] * src[1] + m_data[0][2] * src[2];
+        const Type y = m_data[1][0] * src[0] + m_data[1][1] * src[1] + m_data[1][2] * src[2];
+        const Type z = m_data[2][0] * src[0] + m_data[2][1] * src[1] + m_data[2][2] * src[2];
 
         dst.setValue(x, y, z);
     }
@@ -277,9 +277,9 @@ public:
     //! Multiplies given row vector by matrix, giving vector result.
     void multVecMatrix(const vec3<Type>& src, vec3<Type>& dst) const
     {
-        Type x = src[0] * m_data[0][0] + src[1] * m_data[1][0] + src[2] * m_data[2][0];
-        Type y = src[0] * m_data[0][1] + src[1] * m_data[1][1] + src[2] * m_data[2][1];
-        Type z = src[0] * m_data[0][2] + src[1] * m_data[1][2] + src[2] * m_data[2][2];
+        const Type x = src[0] * m_data[0][0] + src[1] * m_data[1][0] + src[2] * m_data[2][0];
+        const Type y = src[0] * m_data[0][1] + src[1] * m_data[1][1] + src[2] * m_data[2][1];
+        const Type z = src[0] * m_data[0][2] + src[1] * m_data[1][2] + src[2] * m_data[2][2];
 
         dst.setValue(x, y, z);
     }

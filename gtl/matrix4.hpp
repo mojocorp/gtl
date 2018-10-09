@@ -417,10 +417,10 @@ public:
     //! Multiplies matrix by given column vector, giving vector result.
     void multMatrixVec(const vec3<Type>& src, vec3<Type>& dst) const
     {
-        Type x = m_data[0][0] * src[0] + m_data[0][1] * src[1] + m_data[0][2] * src[2] + m_data[0][3];
-        Type y = m_data[1][0] * src[0] + m_data[1][1] * src[1] + m_data[1][2] * src[2] + m_data[1][3];
-        Type z = m_data[2][0] * src[0] + m_data[2][1] * src[1] + m_data[2][2] * src[2] + m_data[2][3];
-        Type w = m_data[3][0] * src[0] + m_data[3][1] * src[1] + m_data[3][2] * src[2] + m_data[3][3];
+        const Type x = m_data[0][0] * src[0] + m_data[0][1] * src[1] + m_data[0][2] * src[2] + m_data[0][3];
+        const Type y = m_data[1][0] * src[0] + m_data[1][1] * src[1] + m_data[1][2] * src[2] + m_data[1][3];
+        const Type z = m_data[2][0] * src[0] + m_data[2][1] * src[1] + m_data[2][2] * src[2] + m_data[2][3];
+        const Type w = m_data[3][0] * src[0] + m_data[3][1] * src[1] + m_data[3][2] * src[2] + m_data[3][3];
 
         dst.setValue(x / w, y / w, z / w);
     }
@@ -428,10 +428,10 @@ public:
     //! Multiplies given row vector by matrix, giving vector result.
     void multVecMatrix(const vec3<Type>& src, vec3<Type>& dst) const
     {
-        Type x = src[0] * m_data[0][0] + src[1] * m_data[1][0] + src[2] * m_data[2][0] + m_data[3][0];
-        Type y = src[0] * m_data[0][1] + src[1] * m_data[1][1] + src[2] * m_data[2][1] + m_data[3][1];
-        Type z = src[0] * m_data[0][2] + src[1] * m_data[1][2] + src[2] * m_data[2][2] + m_data[3][2];
-        Type w = src[0] * m_data[0][3] + src[1] * m_data[1][3] + src[2] * m_data[2][3] + m_data[3][3];
+        const Type x = src[0] * m_data[0][0] + src[1] * m_data[1][0] + src[2] * m_data[2][0] + m_data[3][0];
+        const Type y = src[0] * m_data[0][1] + src[1] * m_data[1][1] + src[2] * m_data[2][1] + m_data[3][1];
+        const Type z = src[0] * m_data[0][2] + src[1] * m_data[1][2] + src[2] * m_data[2][2] + m_data[3][2];
+        const Type w = src[0] * m_data[0][3] + src[1] * m_data[1][3] + src[2] * m_data[2][3] + m_data[3][3];
 
         dst.setValue(x / w, y / w, z / w);
     }
