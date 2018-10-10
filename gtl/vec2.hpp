@@ -123,6 +123,23 @@ namespace gtl {
             y = -y;
         }
 
+        //! Return this vector reflected off the surface with the given normal \a N. N should be normalized.
+        vec2<Type> reflect(const vec2<Type>& N) const
+        {
+            const vec2<Type>& I(*this);
+
+            return I - 2 * N.dot(I) * N;
+        }
+
+        //! Refract this vector through a surface with the given normal \a N and ratio of indices of refraction \a eta.
+        vec2<Type> refract(const vec2<Type>& N, Type eta) const
+        {
+            const vec2<Type>& I(*this);
+            const Type k = 1.0 - eta * eta * (1.0 - N.dot(I) * N.dot(I));
+
+            return (k < 0.0) ? 0 : eta * I - (eta * N.dot(I) + std::sqrt(k)) * N;
+        }
+
         //! Index operator. Returns modifiable x or y value.
         Type& operator[](int i)
         {

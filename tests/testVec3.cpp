@@ -41,3 +41,20 @@ TEST(Vec3Test, contructors)
     v3f1.negate();
     v3f1.getValue();
 }
+
+TEST(Vec3Test, reflect)
+{
+    vec3f A(1.0f, -1.0f, 0.0f);
+    vec3f B(0.0f, 1.0f, 0.0f);
+    vec3f C = A.reflect(B);
+
+    EXPECT_TRUE(C.equals(vec3f(1.0f, 1.0f, 0.0f)));
+}
+
+TEST(Vec3Test, refract)
+{
+    vec3f A(0.0f, -1.0f, 0.0f);
+    vec3f B(0.0f, 1.0f, 0.0f);
+    vec3f C = A.refract(B, 0.5f);
+    EXPECT_TRUE(C.equals(vec3f(0.0, -1.0, 0.0f)));
+}
