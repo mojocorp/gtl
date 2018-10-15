@@ -192,11 +192,11 @@ namespace gtl {
 
             const vec3<int> sign(inv_direction[0] < 0, inv_direction[1] < 0, inv_direction[2] < 0);
 
-            tmin = ((sign[0] ? m_max : m_min).x() - a_ray.getOrigin().x()) * inv_direction.x();
-            tmax = (((1 - sign[0]) ? m_max : m_min).x() - a_ray.getOrigin().x()) * inv_direction.x();
+            tmin = ((sign[0] ? m_max : m_min).x - a_ray.getOrigin().x) * inv_direction.x;
+            tmax = (((1 - sign[0]) ? m_max : m_min).x - a_ray.getOrigin().x) * inv_direction.x;
 
-            const Type tymin = ((sign[1] ? m_max : m_min).y() - a_ray.getOrigin().y()) * inv_direction.y();
-            const Type tymax = (((1 - sign[1]) ? m_max : m_min).y() - a_ray.getOrigin().y()) * inv_direction.y();
+            const Type tymin = ((sign[1] ? m_max : m_min).y - a_ray.getOrigin().y) * inv_direction.y;
+            const Type tymax = (((1 - sign[1]) ? m_max : m_min).y - a_ray.getOrigin().y) * inv_direction.y;
 
             if ((tmin > tymax) || (tymin > tmax))
                 return false;
@@ -206,8 +206,8 @@ namespace gtl {
             if (tymax < tmax)
                 tmax = tymax;
 
-            const Type tzmin = ((sign[2] ? m_max : m_min).z() - a_ray.getOrigin().z()) * inv_direction.z();
-            const Type tzmax = (((1 - sign[2]) ? m_max : m_min).z() - a_ray.getOrigin().z()) * inv_direction.z();
+            const Type tzmin = ((sign[2] ? m_max : m_min).z - a_ray.getOrigin().z) * inv_direction.z;
+            const Type tzmax = (((1 - sign[2]) ? m_max : m_min).z - a_ray.getOrigin().z) * inv_direction.z;
 
             if ((tmin > tzmax) || (tzmin > tmax))
                 return false;
