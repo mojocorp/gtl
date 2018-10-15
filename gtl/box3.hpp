@@ -33,9 +33,9 @@ namespace gtl {
 
         //! Constructs a box with the given corners.
         box3(const vec3<Type>& a_min, const vec3<Type>& a_max)
+            : m_min(a_min)
+            , m_max(a_max)
         {
-            m_min = a_min;
-            m_max = a_max;
         }
 
         //! Reset the boundaries of the box with the given corners.

@@ -21,34 +21,34 @@ namespace gtl {
 
         //! The default constructor.The vector will be null.
         vec3()
+            : x(0)
+            , y(0)
+            , z(0)
         {
-            x = 0;
-            y = 0;
-            z = 0;
         }
 
         //! Constructs an instance with initial values from \a v.
         vec3(const Type v[3])
+            : x(v[0])
+            , y(v[1])
+            , z(v[2])
         {
-            x = v[0];
-            y = v[1];
-            z = v[2];
         }
 
         //! Constructs an instance with the initial values from \a a_x, \a a_y and \a a_z.
         vec3(Type a_x, Type a_y, Type a_z)
+            : x(a_x)
+            , y(a_y)
+            , z(a_z)
         {
-            x = a_x;
-            y = a_y;
-            z = a_z;
         }
 
         //! Constructs an instance with initial values from \a a_vec.
         vec3(const vec3<Type>& a_vec)
+            : x(a_vec.x)
+            , y(a_vec.y)
+            , z(a_vec.z)
         {
-            x = a_vec.x;
-            y = a_vec.y;
-            z = a_vec.z;
         }
 
         //! Set new x, y and z values for the vector. Returns reference to self.

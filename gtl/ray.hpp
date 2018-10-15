@@ -23,9 +23,9 @@ namespace gtl {
 
         //! Constructs an instance with initial values from \a a_ray.
         ray(const ray<Type>& a_ray)
+            : m_origin(a_ray.m_origin)
+            , m_direction(a_ray.m_direction)
         {
-            m_origin = a_ray.m_origin;
-            m_direction = a_ray.m_direction;
         }
 
         //! Create a ray from a_origin with the direction a_direction. If \a normalize is true, \a a_direction will be normalized.
@@ -38,9 +38,7 @@ namespace gtl {
         void setValue(const vec3<Type>& a_origin, const vec3<Type>& a_direction, bool normalize = true)
         {
             m_origin = a_origin;
-            m_direction = a_direction;
-            if (normalize)
-                m_direction.normalize();
+            m_direction = normalize ? a_direction.normalized() : a_direction;
         }
 
         //! Return the ray origin.

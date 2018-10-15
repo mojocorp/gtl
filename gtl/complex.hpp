@@ -13,16 +13,16 @@ namespace gtl {
     public:
         //! Constructs an instance using given real and imaginary values.
         complex(Type a_real, Type a_imaginary)
+            : m_real(a_real)
+            , m_imag(a_imaginary)
         {
-            m_real = a_real;
-            m_imag = a_imaginary;
         }
 
         //! Constructs an instance using values from a given complex instance
         complex(const complex<Type>& c)
+            : m_real(c.m_real)
+            , m_imag(c.m_imag)
         {
-            m_real = c.m_real;
-            m_imag = c.m_imag;
         }
 
         //! Set new real and imaginary values for the complex. Returns reference to self.

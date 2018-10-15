@@ -23,16 +23,16 @@ namespace gtl {
 
         //! Constructs an instance with initial values from \a a_center and \a a_radius.
         circle(const vec2<Type>& a_center, Type a_radius)
+            : m_center(a_center)
+            , m_radius(a_radius)
         {
-            m_center = a_center;
-            m_radius = a_radius;
         }
 
         //! Constructs an instance with initial values from \a a_circle.
         circle(const circle<Type>& a_circle)
+            : m_center(a_circle.m_center)
+            , m_radius(a_circle.m_radius)
         {
-            m_center = a_circle.m_center;
-            m_radius = a_circle.m_radius;
         }
 
         //! Construct a circle from 2 Points.

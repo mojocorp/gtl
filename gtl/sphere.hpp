@@ -20,23 +20,23 @@ namespace gtl {
     public:
         //! The default constructor.
         sphere()
+            : m_center(vec3<Type>(0.0, 0.0, 0.0))
+            , m_radius(1)
         {
-            m_center.setValue(0.0, 0.0, 0.0);
-            m_radius = 1;
         }
 
         //! Constructs an instance with initial values from \a a_sphere.
         sphere(const sphere<Type>& a_sphere)
+            : m_center(a_sphere.m_center)
+            , m_radius(a_sphere.m_radius)
         {
-            m_center = a_sphere.m_center;
-            m_radius = a_sphere.m_radius;
         }
 
         //! Construct a sphere given center and radius
-        sphere(const vec3<Type>& c, Type r)
+        sphere(const vec3<Type>& a_center, Type a_radius)
+            : m_center(a_center)
+            , m_radius(a_radius)
         {
-            m_center = c;
-            m_radius = r;
         }
 
         //! Construct a sphere given the poles

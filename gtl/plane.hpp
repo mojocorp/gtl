@@ -27,25 +27,22 @@ namespace gtl {
 
         //! Construct a plane from a normal and a distance from coordinate system origin.
         plane(const vec3<Type>& a_normal, Type a_distance)
+            : m_normal(a_normal.normalized())
+            , m_distance(a_distance)
         {
-            m_normal = a_normal;
-            m_normal.normalize();
-            m_distance = a_distance;
         }
 
         //! Construct a plane from a normal and a point laying in the plane. \a normal must not be null.
         plane(const vec3<Type>& a_normal, const vec3<Type>& a_pt)
+            : m_normal(a_normal.normalized())
+            , m_distance(m_normal.dot(a_pt))
         {
-            m_normal = a_normal;
-            m_normal.normalize();
-            m_distance = m_normal.dot(a_pt);
         }
 
         //! Construct a plane with three points laying in the plane.
         plane(const vec3<Type>& a_pt1, const vec3<Type>& a_pt2, const vec3<Type>& a_pt3)
         {
-            m_normal = (a_pt2 - a_pt1).cross(a_pt3 - a_pt1);
-            m_normal.normalize();
+            m_normal = ((a_pt2 - a_pt1).cross(a_pt3 - a_pt1)).normalized();
             m_distance = m_normal.dot(a_pt1);
         }
 

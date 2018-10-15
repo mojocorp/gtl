@@ -20,30 +20,30 @@ namespace gtl {
 
         //! The default constructor.The vector will be null.
         vec2()
+            : x(0)
+            , y(0)
         {
-            x = 0;
-            y = 0;
         }
 
         //! Constructs an instance with initial values from \a v.
         vec2(const Type v[2])
+            : x(v[0])
+            , y(v[1])
         {
-            x = v[0];
-            y = v[1];
         }
 
         //! Constructs an instance with the initial values from \a a_x and \a a_y.
         vec2(Type a_x, Type a_y)
+            : x(a_x)
+            , y(a_y)
         {
-            x = a_x;
-            y = a_y;
         }
 
         //! Constructs an instance with initial values from \a a_vec.
         vec2(const vec2<Type>& a_vec)
+            : x(a_vec.x)
+            , y(a_vec.y)
         {
-            x = a_vec.x;
-            y = a_vec.y;
         }
 
         //! Set new x and y coordinates for the vector. Returns reference to self.

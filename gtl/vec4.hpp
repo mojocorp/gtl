@@ -22,38 +22,38 @@ namespace gtl {
 
         //! The default constructor.The vector will be null.
         vec4()
+            : x(0)
+            , y(0)
+            , z(0)
+            , w(0)
         {
-            x = 0;
-            y = 0;
-            z = 0;
-            w = 0;
         }
 
         //! Constructs an instance with initial values from \a v.
         vec4(const Type v[4])
+            : x(v[0])
+            , y(v[1])
+            , z(v[2])
+            , w(v[3])
         {
-            x = v[0];
-            y = v[1];
-            z = v[2];
-            w = v[3];
         }
 
         //! Constructs an instance with the initial values from \a a_x, \a a_y, \a a_z and \a a_w.
         vec4(Type a_x, Type a_y, Type a_z, Type a_w)
+            : x(a_x)
+            , y(a_y)
+            , z(a_z)
+            , w(a_w)
         {
-            x = a_x;
-            y = a_y;
-            z = a_z;
-            w = a_w;
         }
 
         //! Constructs an instance with initial values from \a a_vec.
         vec4(const vec4<Type>& a_vec)
+            : x(a_vec.x)
+            , y(a_vec.y)
+            , z(a_vec.z)
+            , w(a_vec.w)
         {
-            x = a_vec.x;
-            y = a_vec.y;
-            z = a_vec.z;
-            w = a_vec.w;
         }
 
         //! Set new x, y, z and w values for the vector. Returns reference to self.
