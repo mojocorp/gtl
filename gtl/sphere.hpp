@@ -172,7 +172,7 @@ namespace gtl {
         }
 
         //! Intersect ray and sphere, returning true if there is an intersection.
-        bool intersect(const ray<Type>& r, Type& t0, Type& t1) const
+        bool intersect(const ray<Type>& r, Type& tmin, Type& tmax) const
         {
             const vec3<Type> r_to_s = r.getOrigin() - m_center;
 
@@ -190,17 +190,17 @@ namespace gtl {
 
             disc = (Type)std::sqrt((double)disc);
 
-            t0 = (-B + disc) / (2.0 * A);
-            t1 = (-B - disc) / (2.0 * A);
+            tmin = (-B + disc) / (2.0 * A);
+            tmax = (-B - disc) / (2.0 * A);
 
             // check if we're inside it
-            if ((t0 < 0.0 && t1 > 0) || (t0 > 0 && t1 < 0))
+            if ((tmin < 0.0 && tmax > 0) || (tmin > 0 && tmax < 0))
                 return false;
 
-            if (t0 > t1)
-                std::swap(t0, t1);
+            if (tmin > tmax)
+                std::swap(tmin, tmax);
 
-            return (t0 > 0);
+            return (tmin > 0);
         }
 
         //! Intersect with an axis aligned box, returning true if there is an intersection.
