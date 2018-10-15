@@ -18,6 +18,9 @@ namespace gtl {
     template <typename Type>
     class ray {
     public:
+        //! Default constructor. Does nothing.
+        ray() {}
+
         //! Constructs an instance with initial values from \a a_ray.
         ray(const ray<Type>& a_ray)
         {
