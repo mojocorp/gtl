@@ -4,16 +4,14 @@ branches:
     - master
 matrix:
   include:
-  - compiler: clang
-    os: linux
-    env: QMAKESPEC=unsupported/linux-clang
   - compiler: gcc
     os: linux
-    env: QMAKESPEC=linux-g++
-#  - compiler: clang
-#    os: osx
-#    env: QMAKESPEC=unsupported/macx-clang
-#  - compiler: gcc
-#    os: osx
-#    env: QMAKESPEC=macx-g++
-script: cd tests && qmake -r && make -j4 && ./tests 
+    dist: trusty
+  - compiler: clang
+    os: osx
+
+script:
+- mkdir -p build
+- cd build
+- cmake -DCMAKE_BUILD_TYPE=Release ..
+- cmake --build . --config Release
