@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.1.0)
 
 include_directories(. ..)
 
+add_definitions(-DGTEST_HAS_PTHREAD=0)
+
 set(HEADERS
     gtest/gtest.h)
 
