@@ -131,10 +131,7 @@ namespace gtl {
             if (intersect(a_point))
                 return;
 
-            vec3<Type> dir = m_center - a_point;
-
-            dir.normalize();
-
+            const vec3<Type> dir = (m_center - a_point).normalized();
             const vec3<Type> p1 = m_center + m_radius * dir;
 
             setPoles(p1, a_point);
@@ -146,10 +143,7 @@ namespace gtl {
             if (intersect(sphere))
                 return;
 
-            vec3<Type> dir = m_center - sphere.getCenter();
-
-            dir.normalize();
-
+            const vec3<Type> dir = (m_center - sphere.getCenter()).normalized();
             const vec3<Type> p1 = m_center + m_radius * dir;
             const vec3<Type> p2 = sphere.getCenter() - sphere.getRadius() * dir;
 
