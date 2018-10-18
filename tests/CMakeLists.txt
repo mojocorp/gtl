@@ -12,7 +12,7 @@ set(SOURCES
     main.cpp
     testBox2.cpp
     testBox3.cpp
-    testCircle.cpp
+    testCircle2.cpp
     testComplex.cpp
     testMatrix3.cpp
     testMatrix4.cpp

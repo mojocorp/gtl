@@ -7,7 +7,7 @@
 
 namespace gtl {
     /*!
-    \class circle circle.hpp gtl/circle.hpp
+    \class circle2 circle2.hpp gtl/circle2.hpp
     \brief 2 dimensional circle.
     \ingroup base
 
@@ -16,34 +16,34 @@ namespace gtl {
     \sa   
     */
     template <typename Type>
-    class circle {
+    class circle2 {
     public:
         //! The default constructor. Does nothing.
-        circle() {}
+        circle2() {}
 
         //! Constructs an instance with initial values from \a a_center and \a a_radius.
-        circle(const vec2<Type>& a_center, Type a_radius)
+        circle2(const vec2<Type>& a_center, Type a_radius)
             : m_center(a_center)
             , m_radius(a_radius)
         {
         }
 
         //! Constructs an instance with initial values from \a a_circle.
-        circle(const circle<Type>& a_circle)
+        circle2(const circle2<Type>& a_circle)
             : m_center(a_circle.m_center)
             , m_radius(a_circle.m_radius)
         {
         }
 
         //! Construct a circle from 2 Points.
-        circle(const vec2<Type>& p1, const vec2<Type>& p2)
+        circle2(const vec2<Type>& p1, const vec2<Type>& p2)
         {
             m_center = (p1 + p2) * 0.5f;
             m_radius = (p2 - p1).length();
         }
 
         //! Construct a circle from 3 Points. p1, p2, p3 should be co-planar.
-        circle(const vec2<Type>& p1, const vec2<Type>& p2, const vec2<Type>& p3)
+        circle2(const vec2<Type>& p1, const vec2<Type>& p2, const vec2<Type>& p3)
         {
             setValue(p1, p2, p3);
         }
@@ -121,7 +121,7 @@ namespace gtl {
         }
 
         //! Intersect with a circle, returning true if there is an intersection.
-        bool intersect(const circle<Type>& c, vec2<Type>& p1, vec2<Type>& p2) const
+        bool intersect(const circle2<Type>& c, vec2<Type>& p1, vec2<Type>& p2) const
         {
             // Based on code from Paul Bourke
             // http://astronomy.swin.edu.au/~pbourke
@@ -163,7 +163,7 @@ namespace gtl {
             return true;
         }
 
-        friend std::ostream& operator<<(std::ostream& os, const circle<Type>& c)
+        friend std::ostream& operator<<(std::ostream& os, const circle2<Type>& c)
         {
             return os << c.m_center.x() << " " << c.m_center.y() << " " << c.m_radius;
         }
@@ -173,7 +173,7 @@ namespace gtl {
         Type m_radius; //!< circle radius
     };
 
-    typedef circle<int> circlei;
-    typedef circle<float> circlef;
-    typedef circle<double> circled;
+    typedef circle2<int> circle2i;
+    typedef circle2<float> circle2f;
+    typedef circle2<double> circle2d;
 } // namespace gtl
