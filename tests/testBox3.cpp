@@ -73,7 +73,7 @@ TEST(Box3Test, triBoxOverlapCompare)
                    gtl::vec3f(boxcenter + boxhalfsize));
     gtl::vec3f triverts[3];
 
-    std::srand(std::time(0));
+    std::srand(std::time(nullptr));
     for (int i = 0; i < 100000; i++) {
         triverts[0] = getRandomVector(-4.0f, 4.0f);
         triverts[1] = getRandomVector(-4.0f, 4.0f);
@@ -136,8 +136,8 @@ TEST(Box3Test, triBoxOverlap_gtl)
 /* suggestions and discussions on how to optimize code. */
 /* Thanks to David Hunt for finding a ">="-bug!         */
 /********************************************************/
-#include <math.h>
-#include <stdio.h>
+#include <cmath>
+#include <cstdio>
 
 #define X 0
 #define Y 1
