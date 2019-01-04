@@ -93,10 +93,8 @@ namespace gtl {
         {
             const Type magnitude = length();
 
-            if (magnitude != 0.0)
-                (*this) *= (Type)(1.0 / magnitude);
-            else
-                setValue(0.0, 0.0);
+            if (magnitude > 0)
+                *this /= magnitude;
 
             return magnitude;
         }
@@ -143,13 +141,13 @@ namespace gtl {
         //! Index operator. Returns modifiable x or y value.
         Type& operator[](int i)
         {
-            return (&x)[i];
+            return reinterpret_cast<Type*>(this)[i];
         }
 
         //! Index operator. Returns x or y value.
         const Type& operator[](int i) const
         {
-            return (&x)[i];
+            return reinterpret_cast<const Type*>(this)[i];
         }
 
         //! Multiply components of vector with value \a d. Returns reference to self.

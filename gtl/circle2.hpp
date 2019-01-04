@@ -63,8 +63,7 @@ namespace gtl {
             const Type C2 = p3.sqrLength();
 
             // equation is (x - centre.x)^2 + (y - centre.y)^2 = radius^2
-            const Type det = 4 * (p1.x() * p2.y() + p3.x() * p1.y() + p2.x() * p3.y() - p3.x() * p2.y() - p1.x() * p3.y() - p2.x() * p1.y());
-
+            const Type det = 4 * (p1.cross(p2) + p3.cross(p1) + p2.cross(p3));
             if (det != 0.0) {
                 m_center[0] = 2 * (A2 * p2.y() + C2 * p1.y() + B2 * p3.y() - C2 * p2.y() - A2 * p3.y() - B2 * p1.y()) / det;
                 m_center[1] = 2 * (p1.x() * B2 + p3.x() * A2 + p2.x() * C2 - p3.x() * B2 - p1.x() * C2 - p2.x() * A2) / det;
@@ -72,8 +71,7 @@ namespace gtl {
                 m_radius = (p1 - m_center).length();
                 return true;
             }
-            m_center[0] = 0.0f;
-            m_center[1] = 0.0f;
+            m_center.setValue(0, 0, 0);
             m_radius = -1.0f;
             return false;
         }
