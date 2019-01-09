@@ -315,9 +315,7 @@ namespace gtl {
         //! Non-destructively inverses the rotation and returns the result.
         quaternion<Type> inverted() const
         {
-            quaternion<Type> quat(*this);
-
-            return quat.invert();
+            return quaternion<Type>(*this).invert();
         }
 
         //! Multiplies the quaternions.
