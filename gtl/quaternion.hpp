@@ -116,8 +116,8 @@ namespace gtl {
                 if (a_matrix[2][2] > a_matrix[i][i])
                     i = 2;
 
-                int j = (i + 1) % 3;
-                int k = (j + 1) % 3;
+                const int j = (i + 1) % 3;
+                const int k = (j + 1) % 3;
 
                 float s = std::sqrt((a_matrix[i][i] - (a_matrix[j][j] + a_matrix[k][k])) + a_matrix[3][3]);
 
@@ -142,9 +142,7 @@ namespace gtl {
 
             const Type sineval = (Type)std::sin(gtl::DegToRad(a_degree) / (Type)2.0);
 
-            vec3<Type> a = a_axis;
-
-            a.normalize();
+            const vec3<Type> a = a_axis.normalized();
 
             m_data[0] = a[0] * sineval;
             m_data[1] = a[1] * sineval;
@@ -154,11 +152,8 @@ namespace gtl {
         //! Construct a rotation which is the minimum rotation necessary to make vector \a rotate_from point in the direction of vector \a rotate_to.
         void setValue(const vec3<Type>& a_rotate_from, const vec3<Type>& a_rotate_to)
         {
-            vec3<Type> from(a_rotate_from);
-            from.normalize();
-
-            vec3<Type> to(a_rotate_to);
-            to.normalize();
+            const vec3<Type> from = a_rotate_from.normalized();
+            const vec3<Type> to = a_rotate_to.normalized();
 
             const Type dot = from.dot(to);
 
@@ -203,16 +198,16 @@ namespace gtl {
             pitch = gtl::DegToRad(pitch) * (Type)0.5;
             roll = gtl::DegToRad(roll) * (Type)0.5;
 
-            Type c1 = std::cos(roll);
-            Type c2 = std::cos(yaw);
-            Type c3 = std::cos(pitch);
+            const Type c1 = std::cos(roll);
+            const Type c2 = std::cos(yaw);
+            const Type c3 = std::cos(pitch);
 
-            Type s1 = std::sin(roll);
-            Type s2 = std::sin(yaw);
-            Type s3 = std::sin(pitch);
+            const Type s1 = std::sin(roll);
+            const Type s2 = std::sin(yaw);
+            const Type s3 = std::sin(pitch);
 
-            Type c2c1 = c2 * c1;
-            Type s2s1 = s2 * s1;
+            const Type c2c1 = c2 * c1;
+            const Type s2s1 = s2 * s1;
 
             m_data[0] = s3 * c2c1 - c3 * s2s1;
             m_data[1] = c3 * s2 * c1 + s3 * c2 * s1;
@@ -232,7 +227,7 @@ namespace gtl {
             if ((m_data[3] >= -1.0) && (m_data[3] <= 1.0)) {
                 a_degree = (Type)(std::acos(m_data[3])) * 2.0f;
 
-                Type scale = (Type)std::sin(gtl::DegToRad(a_degree) / 2.0f);
+                const Type scale = (Type)std::sin(gtl::DegToRad(a_degree) / 2.0f);
 
                 if (scale != 0.0f) {
                     a_axis[0] = m_data[0] / scale;
@@ -251,10 +246,10 @@ namespace gtl {
 
         void getValue(Type& yaw, Type& pitch, Type& roll) const
         {
-            Type q12 = m_data[0] * m_data[0];
-            Type q22 = m_data[1] * m_data[1];
-            Type q32 = m_data[2] * m_data[2];
-            Type q42 = m_data[3] * m_data[3];
+            const Type q12 = m_data[0] * m_data[0];
+            const Type q22 = m_data[1] * m_data[1];
+            const Type q32 = m_data[2] * m_data[2];
+            const Type q42 = m_data[3] * m_data[3];
 
             yaw = gtl::RadToDeg(std::asin(-2.0 * (m_data[0] * m_data[2] - m_data[3] * m_data[1])));
             pitch = gtl::RadToDeg(std::atan(2.0 * (m_data[3] * m_data[0] + m_data[1] * m_data[2]) / (q42 - q12 - q22 + q32)));
@@ -267,18 +262,18 @@ namespace gtl {
             matrix4<Type> matrix;
 
             // calculate coefficients
-            Type x2 = m_data[0] + m_data[0];
-            Type y2 = m_data[1] + m_data[1];
-            Type z2 = m_data[2] + m_data[2];
-            Type xx = m_data[0] * x2;
-            Type xy = m_data[0] * y2;
-            Type xz = m_data[0] * z2;
-            Type yy = m_data[1] * y2;
-            Type yz = m_data[1] * z2;
-            Type zz = m_data[2] * z2;
-            Type wx = m_data[3] * x2;
-            Type wy = m_data[3] * y2;
-            Type wz = m_data[3] * z2;
+            const Type x2 = m_data[0] + m_data[0];
+            const Type y2 = m_data[1] + m_data[1];
+            const Type z2 = m_data[2] + m_data[2];
+            const Type xx = m_data[0] * x2;
+            const Type xy = m_data[0] * y2;
+            const Type xz = m_data[0] * z2;
+            const Type yy = m_data[1] * y2;
+            const Type yz = m_data[1] * z2;
+            const Type zz = m_data[2] * z2;
+            const Type wx = m_data[3] * x2;
+            const Type wy = m_data[3] * y2;
+            const Type wz = m_data[3] * z2;
 
             matrix[0][0] = (Type)1.0 - (yy + zz);
             matrix[1][0] = xy - wz;
@@ -328,15 +323,15 @@ namespace gtl {
         //! Multiplies the quaternions.
         quaternion<Type>& operator*=(const quaternion<Type>& a_quat)
         {
-            Type tx = m_data[0];
-            Type ty = m_data[1];
-            Type tz = m_data[2];
-            Type tw = m_data[3];
+            const Type tx = m_data[0];
+            const Type ty = m_data[1];
+            const Type tz = m_data[2];
+            const Type tw = m_data[3];
 
-            Type qx = a_quat.m_data[0];
-            Type qy = a_quat.m_data[1];
-            Type qz = a_quat.m_data[2];
-            Type qw = a_quat.m_data[3];
+            const Type qx = a_quat.m_data[0];
+            const Type qy = a_quat.m_data[1];
+            const Type qz = a_quat.m_data[2];
+            const Type qw = a_quat.m_data[3];
 
             setValue(qw * tx + qx * tw + qy * tz - qz * ty,
                      qw * ty - qx * tz + qy * tw + qz * tx,
@@ -390,23 +385,23 @@ namespace gtl {
         //! Rotate the \a src vector and put the result in \a dst.
         void multVec(const vec3<Type>& src, vec3<Type>& dst) const
         {
-            Type QwQx = m_data[3] * m_data[0];
-            Type QwQy = m_data[3] * m_data[1];
-            Type QwQz = m_data[3] * m_data[2];
-            Type QxQy = m_data[0] * m_data[1];
-            Type QxQz = m_data[0] * m_data[2];
-            Type QyQz = m_data[1] * m_data[2];
+            const Type QwQx = m_data[3] * m_data[0];
+            const Type QwQy = m_data[3] * m_data[1];
+            const Type QwQz = m_data[3] * m_data[2];
+            const Type QxQy = m_data[0] * m_data[1];
+            const Type QxQz = m_data[0] * m_data[2];
+            const Type QyQz = m_data[1] * m_data[2];
 
-            Type Vx = src[0], Vy = src[1], Vz = src[2];
+            const Type Vx = src[0], Vy = src[1], Vz = src[2];
 
-            Type rx = 2 * (Vy * (-QwQz + QxQy) + Vz * (QwQy + QxQz));
-            Type ry = 2 * (Vx * (QwQz + QxQy) + Vz * (-QwQx + QyQz));
-            Type rz = 2 * (Vx * (-QwQy + QxQz) + Vy * (QwQx + QyQz));
+            const Type rx = 2 * (Vy * (-QwQz + QxQy) + Vz * (QwQy + QxQz));
+            const Type ry = 2 * (Vx * (QwQz + QxQy) + Vz * (-QwQx + QyQz));
+            const Type rz = 2 * (Vx * (-QwQy + QxQz) + Vy * (QwQx + QyQz));
 
-            Type QwQw = m_data[3] * m_data[3];
-            Type QxQx = m_data[0] * m_data[0];
-            Type QyQy = m_data[1] * m_data[1];
-            Type QzQz = m_data[2] * m_data[2];
+            const Type QwQw = m_data[3] * m_data[3];
+            const Type QxQx = m_data[0] * m_data[0];
+            const Type QyQy = m_data[1] * m_data[1];
+            const Type QzQz = m_data[2] * m_data[2];
 
             rx += Vx * (QwQw + QxQx - QyQy - QzQz);
             ry += Vy * (QwQw - QxQx + QyQy - QzQz);
@@ -453,7 +448,7 @@ namespace gtl {
                 }
             }
 
-            vec4<Type> vec = (scale0 * rot0.m_data) + (scale1 * to.m_data);
+            const vec4<Type> vec = (scale0 * rot0.m_data) + (scale1 * to.m_data);
 
             return quaternion<Type>(vec[0], vec[1], vec[2], vec[3]);
         }
