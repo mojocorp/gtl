@@ -13,8 +13,6 @@ namespace gtl {
     \sa vec2
     */
     template <typename Type>
-    class vec3 {
-    public:
         Type x;
         Type y;
         Type z;
