@@ -13,8 +13,16 @@ namespace gtl {
     \sa vec3
     */
     template <typename Type>
-        Type x;
-        Type y;
+    struct vec2 {
+        union {
+            struct {
+                Type x, y;
+            };
+            struct {
+                Type u, v;
+            };
+            Type data[2];
+        };
 
         //! The default constructor.The vector will be null.
         vec2()
@@ -65,7 +73,7 @@ namespace gtl {
         //! Returns a pointer to an array containing the coordinates of the vector.
         const Type* getValue() const
         {
-            return &x;
+            return data;
         }
 
         //! Calculates and returns the dot product of this vector with \a a_vec.

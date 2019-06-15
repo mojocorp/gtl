@@ -13,10 +13,16 @@ namespace gtl {
     \sa vec3
     */
     template <typename Type>
-        Type x;
-        Type y;
-        Type z;
-        Type w;
+    struct vec4 {
+        union {
+            struct {
+                Type x, y, z, w;
+            };
+            struct {
+                Type r, g, b, a;
+            };
+            Type data[4];
+        };
 
         //! The default constructor.The vector will be null.
         vec4()
