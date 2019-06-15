@@ -18,7 +18,6 @@
  * - 2D, 3D boxes
  * - 3x3, 4x4 matrices 
  * - quaternion
- * - complex
  * - Ray, plane, spheres.
  * - Intersection functions for all the geometry classes 
  * 
