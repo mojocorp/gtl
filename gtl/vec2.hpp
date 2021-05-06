@@ -115,7 +115,7 @@ namespace gtl {
         }
 
         //! Returns the cross product of this vector with \a a_vec.
-        Type cross(const vec2<Type>& a_vec)
+        Type cross(const vec2<Type>& a_vec) const
         {
             return (x * a_vec.y - y * a_vec.x);
         }
