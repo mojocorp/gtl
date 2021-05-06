@@ -51,9 +51,9 @@ namespace gtl {
     }
 
     template <typename Type>
-    inline void clamp(const Type& min, Type& value, const Type& max)
+    constexpr Type clamp(const Type& value, const Type& min, const Type& max)
     {
-        value = (value < min) ? min : (value > max) ? max : value;
+        return (value < min) ? min : (value > max) ? max : value;
     }
 
     template <typename Type>
